@@ -1,41 +1,27 @@
-query,label
-I need the best camera phone,camera_phone
-Suggest a phone for vlogging and photography,camera_phone
-Best phone for Instagram reels,camera_phone
-I want a phone with great camera features,camera_phone
-Recommend a camera-focused smartphone,camera_phone
-Which phone has the best camera?,camera_phone
-Camera quality is my top priority,camera_phone
-Looking for a mobile with excellent photo capabilities,camera_phone
-I need a phone with ultra HD camera,camera_phone
-Phone for content creation,camera_phone
-I want a phone with long battery life,battery_phone
-Suggest a battery phone,battery_phone
-Phone that lasts all day,battery_phone
-I need a phone with strong battery backup,battery_phone
-Recommend a mobile with long-lasting battery,battery_phone
-Looking for 7000mah battery phone,battery_phone
-I’m tired of charging need good battery,battery_phone
-Suggest phones with big battery,battery_phone
-Which phone has best battery?,battery_phone
-Battery is more important than camera,battery_phone
-I want a gaming phone,gaming_phone
-Suggest a phone for PUBG or COD Mobile,gaming_phone
-Need a phone with high performance,gaming_phone
-Which phone is good for gaming?,gaming_phone
-Gaming performance matters most,gaming_phone
-I need a phone with fast processor,gaming_phone
-Recommend a mobile for heavy gaming,gaming_phone
-Phone with best GPU,gaming_phone
-Suggest a phone for smooth gaming,gaming_phone
-Looking for Snapdragon 888 or better,gaming_phone
-I want a waterproof phone,ip_phone
-Suggest a rugged smartphone,ip_phone
-Looking for an IP68 rated phone,ip_phone
-I need a durable phone for outdoor use,ip_phone
-Recommend a tough smartphone,ip_phone
-Which phones are water resistant?,ip_phone
-Phone with IP rating please,ip_phone
-Looking for shockproof and waterproof phone,ip_phone
-Suggest a phone that can survive harsh weather,ip_phone
-Phone with IP68 and Gorilla Glass,ip_phone
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+import joblib
+
+# Load training data
+df = pd.read_csv('../data/training_data.csv')
+df.columns = df.columns.str.strip()
+df.dropna(inplace=True)
+
+# Features (X) and labels (y)
+X = df['query']
+y = df['label'].str.lower()
+
+# Vectorize the text queries
+vectorizer = TfidfVectorizer()
+X_vec = vectorizer.fit_transform(X)
+
+# Train classifier
+clf = LogisticRegression()
+clf.fit(X_vec, y)
+
+# Save model and vectorizer
+joblib.dump(clf, '../model/model.pkl')
+joblib.dump(vectorizer, '../model/vectorizer.pkl')
+
+print("✅ Model and vectorizer saved successfully!")
