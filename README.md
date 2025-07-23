@@ -30,21 +30,6 @@ An AI-powered smartphone recommendation system built using Flask, scikit-learn, 
 
 ---
 
-## 📁 Project Structure
-📦phonefinder-backend/
-┣ 📂api/
-┃ ┣ 📜app.py # Main Flask API logic
-┣ 📂model/
-┃ ┣ 📜train_model.py # Model training script
-┃ ┣ 📜model.pkl # Trained ML model
-┃ ┣ 📜vectorizer.pkl # TF-IDF vectorizer
-┣ 📂data/
-┃ ┣ 📜phone_specs.csv # Phone specs dataset
-┃ ┣ 📜training_data.csv # Sample queries and labels
-┣ 📂frontend/
-┃ ┣ 📜index.html # UI interface
-┃ ┣ 📜script.js # Frontend JS for API call
-
 git clone https://github.com/yourusername/phonefinder-backend.git
 cd phonefinder-backend
 
